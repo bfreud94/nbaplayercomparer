@@ -1,0 +1,21 @@
+{
+  "name": "nbaplayercomparer",
+  "version": "1.0.0",
+  "description": "Application that compares two or more NBA players' statistics",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"cd ..\\nbaplayercomparer-ui && npm start\" \"nodemon server.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Freudman",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nba": "^4.13.0",
+    "nba-api-client": "^1.0.9",
+    "nodemon": "^2.0.2"
+  }
+}

@@ -1,0 +1,6 @@
+# VS Code Settings
+.vscode/
+
+# Node Modules
+nbaplayercomparer-ui/node_modules
+server/node_modules
