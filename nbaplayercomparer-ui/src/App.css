@@ -1,3 +1,23 @@
 .App {
   text-align: center;
 }
+
+.header {
+  background-color: black;
+  height: 100px;
+  padding: 15px;
+  font-size: 30px;
+  color: yellow;
+}
+
+.datatable  {
+  padding: 100px;
+}
+
+.btn-secondary {
+  margin-left: 850px;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.15);
+}

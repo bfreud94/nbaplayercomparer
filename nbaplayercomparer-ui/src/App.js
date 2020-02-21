@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
-import Datatable from './components/datatable/datatable'
+import Datatable from './components/datatable/datatable';
+import CompareTable from './components/comparetable/compareTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Header from './components/header/header';
+import { Provider } from 'react-redux';
+import store from './store';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = { players: [] };
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:8000/nbaPlayerComparer/getAllPlayers')
-    .then(res => res.json())
-    .then(json => {
-      this.setState({ 'players': json });
-    });
-  }
-
   render()  {
     return (
-      <div className="App">
-        <nav className="navbar navbar-light bg-light">
-          <a className="navbar-brand" href="./">Players
-          </a>
-        </nav>
-        <Datatable players={ this.state.players } />
-        <Datatable />
-      </div>
+      <Router>
+        <Provider store={store}>
+          <div className="App">
+            <Header/>
+            <Route exact path="/" render={props =>  (
+              <React.Fragment>
+                <div className="datatable">
+                  <Datatable />
+                </div>
+              </React.Fragment>
+            )} />
+            <Route exact path="/comparePlayers" render={props =>  (
+              <React.Fragment>
+                <div className="datatable">
+                  <CompareTable />
+                </div>
+              </React.Fragment>
+            )} />
+          </div>
+        </Provider>
+      </Router>
     );
   }
 }

@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
-
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
-import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css';
+import { connect } from 'react-redux';
+import { getPlayers, addPlayer, removePlayer } from '../../actions/playerActions';
+import PropTypes from 'prop-types';
 
 class Datatable extends Component {
 
-  constructor(props)  {
-    super(props);
-
-    this.options = {
-      defaultSortName: 'name',  // default sort column name
-      defaultSortOrder: 'desc'  // default sort order
-    };
+  componentDidMount()  {
+    this.props.getPlayers();
   }
 
-
-
-  componentDidMount()  {
-
+  getAddedPlayersNames()  {
+    return this.props.addedPlayers.map((player) => player.name);
   }
 
   render()  {
+    const selectRow = {
+      mode: 'checkbox',
+      selected: this.getAddedPlayersNames(),
+      onSelect: (row, isSelect, rowIndex, e) => {
+        if(!this.props.addedPlayers.includes(row))  {
+          this.props.addPlayer(row);
+        } else {
+          this.props.removePlayer(row);
+        }
+      }
+    };
     return (
         <BootstrapTable 
           data={this.props.players}
-          bordered={false} striped condensed 
+          bordered={false} striped condensed
+          // eslint-disable-next-line
           options={ this.options, { noDataText: 'Loading...' } }
+          selectRow={selectRow}
           pagination>
           <TableHeaderColumn dataField="name" isKey={ true } dataSort>Name</TableHeaderColumn>
           <TableHeaderColumn dataField="ppg" dataSort>PPG</TableHeaderColumn>
@@ -39,4 +46,17 @@ class Datatable extends Component {
   }
 }
 
-export default Datatable;
+Datatable.propTypes = {
+  getPlayers: PropTypes.func.isRequired,
+  addPlayer: PropTypes.func.isRequired,
+  removePlayer: PropTypes.func.isRequired,
+  players: PropTypes.array.isRequired,
+  addedPlayers: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+   players: state.players.players,
+   addedPlayers: state.players.addedPlayers
+})
+
+export default connect(mapStateToProps, { getPlayers, addPlayer, removePlayer })(Datatable);
