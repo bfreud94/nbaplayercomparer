@@ -2,7 +2,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const nba = require('nba');
-const nbaApiClient = require('nba-api-client');
 // Initialize express
 const app = express();
 

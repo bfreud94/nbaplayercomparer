@@ -15,7 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "nba": "^4.13.0",
-    "nba-api-client": "^1.0.9",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "public-ip": "^4.0.0"
   }
 }
