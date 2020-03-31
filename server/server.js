@@ -2,6 +2,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const nba = require('nba');
+const cors = require('cors')
 // Initialize express
 const app = express();
 
@@ -10,6 +11,9 @@ const port = process.env.PORT || 8000;
 
 // Use bodyParser
 app.use(bodyParser.json());
+
+// Use CORS
+app.use(cors());
 
 // Starting server
 app.listen(port, () =>  {
