@@ -15,12 +15,12 @@ export default function(state = initialState, action)   {
         case ADD_PLAYER:
             return  {
                 ...state,
-                addedPlayers: [...state.addedPlayers, action.payload]
+                addedPlayers: Array.isArray(action.payload) ? state.players : [...state.addedPlayers, action.payload]
             };
         case REMOVE_PLAYER:
             return  {
                 ...state,
-                addedPlayers: state.addedPlayers.filter(currentRow => currentRow !== action.payload)
+                addedPlayers: Array.isArray(action.payload) ? [] : state.addedPlayers.filter(currentRow => currentRow !== action.payload)
             }
         default:
             return state;

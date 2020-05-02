@@ -8,7 +8,9 @@ import PropTypes from 'prop-types';
 class Datatable extends Component {
 
   componentDidMount()  {
-    this.props.getPlayers();
+    if(this.props.addedPlayers.length === 0) {
+      this.props.getPlayers();
+    }
   }
 
   getAddedPlayersNames()  {
@@ -16,15 +18,15 @@ class Datatable extends Component {
   }
 
   render()  {
+    const { addPlayer, addedPlayers, removePlayer} = this.props;
     const selectRow = {
       mode: 'checkbox',
       selected: this.getAddedPlayersNames(),
       onSelect: (row, isSelect, rowIndex, e) => {
-        if(!this.props.addedPlayers.includes(row))  {
-          this.props.addPlayer(row);
-        } else {
-          this.props.removePlayer(row);
-        }
+        addedPlayers.map((player) => player.name).includes(row.name) ? removePlayer(row) : addPlayer(row);
+      },
+      onSelectAll: (row, isSelect, e) => {
+        addedPlayers.length > 0 ? removePlayer(addedPlayers) : addPlayer(addedPlayers);
       }
     };
     return (
