@@ -2,7 +2,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const nba = require('nba');
-const cors = require('cors')
 // Initialize express
 const app = express();
 
@@ -12,8 +11,11 @@ const port = process.env.PORT || 8000;
 // Use bodyParser
 app.use(bodyParser.json());
 
-// Use CORS
-app.use(cors());
+// Serve static assets if in production
+if(process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('nba-player-comparer-client/build'));
+}
 
 // Starting server
 app.listen(port, () =>  {
@@ -21,7 +23,7 @@ app.listen(port, () =>  {
     console.log('Server started on port ' + port);
 });
 
-app.get('/nbaPlayerComparer/comparePlayers', async (request, response) =>  {
+app.get('/nbaPlayerComparer/api/comparePlayers', async (request, response) =>  {
     let playerData = [];
     for(let key in request.query) {
         let player = nba.findPlayer(request.query[key])
@@ -41,7 +43,7 @@ app.get('/nbaPlayerComparer/comparePlayers', async (request, response) =>  {
     return response.send(playerData);
 });
 
-app.get('/nbaPlayerComparer/getAllPlayers', async (request, response) =>  {
+app.get('/nbaPlayerComparer/api/getAllPlayers', async (request, response) =>  {
     let rawPlayerData = await nba.stats.playerStats();
     let playerData = [];
     rawPlayerData.leagueDashPlayerStats.forEach((player) => {

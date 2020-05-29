@@ -2,5 +2,5 @@
 .vscode/
 
 # Node Modules
-nbaplayercomparer-ui/node_modules
-server/node_modules
+nba-player-comparer-client/node_modules
+/node_modules

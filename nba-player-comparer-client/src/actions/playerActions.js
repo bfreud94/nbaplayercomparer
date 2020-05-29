@@ -1,7 +1,7 @@
 import { GET_PLAYERS, ADD_PLAYER, REMOVE_PLAYER} from './types';
 
 export const getPlayers = () => dispatch => {
-    fetch('http://localhost:8000/nbaPlayerComparer/getAllPlayers')
+    fetch('/nbaPlayerComparer/api/getAllPlayers')
         .then(res => res.json())
         .then(players => dispatch({
             type: GET_PLAYERS,

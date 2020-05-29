@@ -4,8 +4,11 @@
   "description": "Application that compares two or more NBA players' statistics",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"cd ..\\nbaplayercomparer-ui && npm start\" \"nodemon server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client-install": "npm install --prefix nba-player-comparer-client",
+    "start": "nodemon server.js",
+    "client": "npm start --prefix nba-player-comparer-client",
+    "dev": "concurrently \"cd nba-player-comparer-client && npm start\" \"nodemon server.js\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix nba-player-comparer-client && npm run build --prefix nba-player-comparer-client"
   },
   "author": "Ben Freudman",
   "license": "MIT",
