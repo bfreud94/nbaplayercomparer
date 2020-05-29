@@ -56,5 +56,5 @@ app.get('/nbaPlayerComparer/api/getAllPlayers', async (request, response) =>  {
             bpg: player.blk
         });
     });
-    response.send(playerData);
+    return response.send(playerData);
 });

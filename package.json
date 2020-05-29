@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix nba-player-comparer-client",
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "client": "npm start --prefix nba-player-comparer-client",
     "dev": "concurrently \"cd nba-player-comparer-client && npm start\" \"nodemon server.js\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix nba-player-comparer-client && npm run build --prefix nba-player-comparer-client"
