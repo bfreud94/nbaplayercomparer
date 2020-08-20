@@ -6,30 +6,30 @@ import './App.css';
 import Header from './components/header/header';
 import { Provider } from 'react-redux';
 import store from './store';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
-  render()  {
-    return (
-      <Router>
-        <Provider store={store}>
-          <div className="App">
-            <Header/>
-            <Route exact path="/" render={props =>  (
-              <React.Fragment>
-                <div className="datatable">
-                  <Datatable />
-                </div>
-              </React.Fragment>
-            )} />
-            <Route exact path="/comparePlayers" render={props =>  (
-              <React.Fragment>
-                <div className="datatable">
-                  <CompareTable />
-                </div>
-              </React.Fragment>
-            )} />
-          </div>
+    render()  {
+        return (
+            <Router>
+                <Provider store={store}>
+                    <div className="App">
+                        <Header/>
+                        <Route exact path="/" render={props => (
+                            <Redirect to='/dataTable'/>
+                        )}>
+                        </Route>
+                        <Route exact path="/dataTable" render={props =>  (
+                            <div className="datatable">
+                                <Datatable />
+                            </div>
+                        )} />
+                        <Route exact path="/comparePlayers" render={props =>  (
+                            <div className="datatable">
+                                <CompareTable />
+                            </div>
+                        )} />
+                    </div>
         </Provider>
       </Router>
     );

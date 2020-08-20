@@ -3,4 +3,12 @@
 
 # Node Modules
 nba-player-comparer-client/node_modules
+nba-player-comparer-ingestion-service/node_modules
 /node_modules
+
+# Build files
+nba-player-comparer-client/build
+
+# Config files
+nba-player-comparer-ingestion-service/.env
+.env

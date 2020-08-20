@@ -7,7 +7,7 @@
     "client-install": "npm install --prefix nba-player-comparer-client",
     "start": "node server.js",
     "client": "npm start --prefix nba-player-comparer-client",
-    "dev": "concurrently \"cd nba-player-comparer-client && npm start\" \"nodemon server.js\"",
+    "dev": "SET NODE_ENV=development && concurrently \"cd nba-player-comparer-client && npm start\" \"nodemon server.js\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix nba-player-comparer-client && npm run build --prefix nba-player-comparer-client"
   },
   "author": "Ben Freudman",
@@ -16,8 +16,9 @@
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nba": "^4.13.0",
+    "mongoose": "^5.10.0",
     "nodemon": "^2.0.2",
     "public-ip": "^4.0.0"
   }

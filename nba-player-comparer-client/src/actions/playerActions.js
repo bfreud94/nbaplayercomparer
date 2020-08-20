@@ -1,7 +1,9 @@
 import { GET_PLAYERS, ADD_PLAYER, REMOVE_PLAYER} from './types';
 
+const serverUri = process.env.NODE_ENV.trim() === 'development' ? 'http://localhost:8000' : '';
+
 export const getPlayers = () => dispatch => {
-    fetch('/nbaPlayerComparer/api/getAllPlayers')
+    fetch(`${serverUri}/nbaPlayerComparer/api/getAllPlayers`)
         .then(res => res.json())
         .then(players => dispatch({
             type: GET_PLAYERS,
