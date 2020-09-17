@@ -12,3 +12,6 @@ nba-player-comparer-client/build
 # Config files
 nba-player-comparer-ingestion-service/.env
 .env
+
+# Debug files
+debug.log
