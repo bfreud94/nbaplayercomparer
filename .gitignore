@@ -15,3 +15,6 @@ nba-player-comparer-ingestion-service/.env
 
 # Debug files
 debug.log
+
+# ESLint Files
+**/.eslintrc.json
