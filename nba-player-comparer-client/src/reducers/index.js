@@ -3,4 +3,4 @@ import playerReducer from './playerReducer';
 
 export default combineReducers({
     players: playerReducer
-})
+});

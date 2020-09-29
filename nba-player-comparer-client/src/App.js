@@ -1,39 +1,38 @@
 import React, { Component } from 'react';
-import Datatable from './components/datatable/datatable';
-import CompareTable from './components/comparetable/compareTable';
+import { Provider } from 'react-redux';
+import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Datatable from './components/Datatable/Datatable';
+import CompareTable from './components/Comparetable/CompareTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Header from './components/header/header';
-import { Provider } from 'react-redux';
 import store from './store';
-import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
-    render()  {
+    render() {
         return (
             <Router>
                 <Provider store={store}>
-                    <div className="App">
-                        <Header/>
-                        <Route exact path="/" render={props => (
-                            <Redirect to='/dataTable'/>
-                        )}>
+                    <div className='App'>
+                        <Header />
+                        <Route exact path='/'>
+                            <Redirect to='/dataTable' />
                         </Route>
-                        <Route exact path="/dataTable" render={props =>  (
-                            <div className="datatable">
-                                <Datatable />
+                        <Route exact path='/dataTable'>
+                            <div className='datatable'>
+                                    <Datatable />
                             </div>
-                        )} />
-                        <Route exact path="/comparePlayers" render={props =>  (
-                            <div className="datatable">
+                        </Route>
+                        <Route exact path='/comparePlayers'>
+                            <div className='datatable'>
                                 <CompareTable />
                             </div>
-                        )} />
+                        </Route>
                     </div>
-        </Provider>
-      </Router>
-    );
-  }
+                </Provider>
+            </Router>
+        );
+    }
 }
 
 export default App;
