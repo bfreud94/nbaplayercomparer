@@ -30,7 +30,9 @@ app.use(express.json());
 app.use(morgan('common'));
 
 // Use Helmet
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false
+}));
 
 // Use CORS
 app.use(cors({
