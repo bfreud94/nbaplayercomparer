@@ -8,7 +8,6 @@ require('dotenv').config()
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, async (err) => {
     const total = await Player.collection.countDocuments()
-    console.log(total)
     if (err || total > 0) {
         console.log(total > 0 ? `Database already populated with ${total} records` : err)
     } else {

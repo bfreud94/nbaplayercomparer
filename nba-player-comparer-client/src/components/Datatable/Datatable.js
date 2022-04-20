@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
@@ -17,29 +17,51 @@ const Datatable = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const [sortedRow, setSortedRow] = useState('name')
+
+    const selectRow = (row) => addedPlayers.map((player) => player.name).includes(row.name) ? removePlayer(row) : addPlayer(row)
+
     const getAddedPlayersNames = () => addedPlayers.map((player) => player.name)
 
-    const selectRow = {
+    const selectRowOptions = {
         mode: 'checkbox',
         selected: getAddedPlayersNames(),
-        onSelect: (row, isSelect, rowIndex, e) => (addedPlayers.map((player) => player.name).includes(row.name) ? removePlayer(row) : addPlayer(row)),
+        onSelect: (row, isSelect, rowIndex, e) => selectRow(row),
         onSelectAll: (row, isSelect, e) => (addedPlayers.length > 0 ? removePlayer(addedPlayers) : addPlayer(addedPlayers))
     }
 
+    const sort = (a, b, order, sort) => {
+        if (sortedRow !== sort) {
+            setSortedRow(sort)
+        }
+        if (sort === 'name') return order === 'desc' ? (a[sort] > b[sort] ? 1 : -1) : (b[sort] > a[sort] ? 1 : -1)
+        return order === 'desc' ? Number(a[sort]) - Number(b[sort]) : Number(b[sort]) - Number(a[sort])
+    }
+
+    const headerColumnStyle = (columnName) => {
+        return {
+            ...sortedRow === columnName && {
+                backgroundColor: 'red'
+            }
+        }  
+    }
+    
     return (
         <BootstrapTable
             data={players}
             bordered={false} striped condensed
             options={{ noDataText: 'Loading...' }}
-            selectRow={selectRow}
+            selectRow={selectRowOptions}
             pagination
         >
-            <TableHeaderColumn dataField='name' isKey dataSort>Name</TableHeaderColumn>
-            <TableHeaderColumn dataField='pts' dataSort sortFunc={(a, b, order) => (order === 'desc' ? Number(a.pts) - Number(b.pts) : Number(b.pts) - Number(a.pts))}>PTS</TableHeaderColumn>
-            <TableHeaderColumn dataField='reb' dataSort sortFunc={(a, b, order) => (order === 'desc' ? Number(a.reb) - Number(b.reb) : Number(b.reb) - Number(a.reb))}>REB</TableHeaderColumn>
-            <TableHeaderColumn dataField='ast' dataSort sortFunc={(a, b, order) => (order === 'desc' ? Number(a.ast) - Number(b.ast) : Number(b.ast) - Number(a.ast))}>AST</TableHeaderColumn>
-            <TableHeaderColumn dataField='stl' dataSort sortFunc={(a, b, order) => (order === 'desc' ? Number(a.stl) - Number(b.stl) : Number(b.stl) - Number(a.stl))}>STL</TableHeaderColumn>
-            <TableHeaderColumn dataField='blk' dataSort sortFunc={(a, b, order) => (order === 'desc' ? Number(a.blk) - Number(b.blk) : Number(b.blk) - Number(a.blk))}>BLK</TableHeaderColumn>
+            <TableHeaderColumn thStyle={{
+                backgroundColor: 'green'
+            }} dataField='name' isKey dataSort sortFunc={(a, b, order) => sort(a, b, order, 'name')}>Name</TableHeaderColumn>
+            <TableHeaderColumn thStyle={headerColumnStyle('pts')} dataField='pts' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'pts')}>PTS</TableHeaderColumn>
+            <TableHeaderColumn thStyle={headerColumnStyle('reb')} dataField='reb' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'reb')}>REB</TableHeaderColumn>
+            <TableHeaderColumn thStyle={headerColumnStyle('ast')} dataField='ast' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'ast')}>AST</TableHeaderColumn>
+            <TableHeaderColumn thStyle={headerColumnStyle('stl')} dataField='stl' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'stl')}>STL</TableHeaderColumn>
+            <TableHeaderColumn thStyle={headerColumnStyle('blk')} dataField='blk' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'blk')}>BLK</TableHeaderColumn>
         </BootstrapTable>
     )
 }
