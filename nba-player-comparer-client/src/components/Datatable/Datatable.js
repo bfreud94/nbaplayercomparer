@@ -56,7 +56,7 @@ const Datatable = ({
         >
             <TableHeaderColumn thStyle={{
                 backgroundColor: 'green'
-            }} dataField='name' isKey dataSort sortFunc={(a, b, order) => sort(a, b, order, 'name')}>Name</TableHeaderColumn>
+            }} dataField='name' isKey dataSort>Name</TableHeaderColumn>
             <TableHeaderColumn thStyle={headerColumnStyle('pts')} dataField='pts' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'pts')}>PTS</TableHeaderColumn>
             <TableHeaderColumn thStyle={headerColumnStyle('reb')} dataField='reb' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'reb')}>REB</TableHeaderColumn>
             <TableHeaderColumn thStyle={headerColumnStyle('ast')} dataField='ast' dataSort sortFunc={(a, b, order) => sort(a, b, order, 'ast')}>AST</TableHeaderColumn>
