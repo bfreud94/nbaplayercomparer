@@ -4,11 +4,12 @@
     "description": "Data ingestion service for NBA Player Comparer web application",
     "main": "server.js",
     "scripts": {
-        "start": "nodemon server.js",
+        "dev": "nodemon server.js",
+        "start": "npm server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "Benjamin Freudman",
+    "license": "MIT",
     "dependencies": {
         "dotenv": "^8.2.0",
         "mongoose": "^5.9.29",
