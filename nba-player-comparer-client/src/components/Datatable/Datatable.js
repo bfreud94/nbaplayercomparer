@@ -41,7 +41,7 @@ const Datatable = ({
     const headerColumnStyle = (columnName) => {
         return {
             ...sortedRow === columnName && {
-                backgroundColor: 'red'
+                backgroundColor: 'rgba(0,0,0,.05)'
             }
         }  
     }
